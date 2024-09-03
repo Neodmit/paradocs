@@ -1,0 +1,8 @@
+<app-table-with-creation
+  [tableFields]="notesTableFields"
+  [dataSource]='dataSource$ | async'
+  [addButtonTitle]="'+ Добавить заметку'"
+  (onDelete)="deleteNote($event)"
+  (onEdit)="editNote($event)"
+  (onAdd)="addNote()"
+></app-table-with-creation>

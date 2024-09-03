@@ -1,0 +1,14 @@
+.mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.table-element {
+  &-title {
+    width: 250px;
+  }
+
+  &-delete, &-edit {
+    text-align: right;
+    width: 100px;
+  }
+}

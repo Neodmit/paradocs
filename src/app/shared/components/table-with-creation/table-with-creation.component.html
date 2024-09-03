@@ -1,0 +1,36 @@
+<button mat-raised-button color="primary" (click)="add()">{{ addButtonTitle }}</button>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container *ngFor="let headerKey of getTableHeaderKeys()" [matColumnDef]="headerKey">
+    <th mat-header-cell *matHeaderCellDef>{{ tableFields[headerKey].name }}</th>
+    <ng-container *ngIf="!tableFields[headerKey].isCellMultipleMode; else multipleView">
+      <td mat-cell *matCellDef="let element" class="table-element-title"> {{ getRowItem(element, headerKey) }} </td>
+    </ng-container>
+
+    <ng-template #multipleView>
+      <td mat-cell *matCellDef="let element" class="table-element-title">
+        <ng-container *ngFor="let cellItem of element[headerKey]">
+         <p>{{ getRowItem(cellItem, headerKey) }}</p>
+        </ng-container>
+      </td>
+
+    </ng-template>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let element" class="table-element-edit">
+      <button mat-raised-button color="primary" (click)="edit(element.id)">{{ 'Edit' }}</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let element" class="table-element-delete">
+      <button mat-raised-button color="warn" (click)="delete(element.id)">{{ 'Delete' }}</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

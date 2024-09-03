@@ -1,0 +1,8 @@
+<app-table-with-creation
+  [tableFields]="tagsTableFields"
+  [dataSource]='dataSource$ | async'
+  [addButtonTitle]="'+ Добавить тэг'"
+  (onDelete)="deleteTag($event)"
+  (onEdit)="editTag($event)"
+  (onAdd)="addTag()"
+></app-table-with-creation>

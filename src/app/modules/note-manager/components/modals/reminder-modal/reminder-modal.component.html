@@ -1,0 +1,38 @@
+<app-modal-layout [modalTitle]="'Добавьте напоминание'" (onSave)="save()">
+  <mat-dialog-content [formGroup]="reminderGroupForm">
+    <mat-form-field>
+      <mat-label>{{ 'Заголовок' }}</mat-label>
+      <input formControlName="title" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'Заметка' }}</mat-label>
+      <mat-select formControlName="notes" multiple>
+        <ng-container *ngFor="let note of notesService.notes$ | async ">
+          <mat-option [value]="note">{{ note.title }}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-date">
+      <mat-label>{{ 'Choose a date' }}</mat-label>
+      <input matInput [matDatepicker]="datePicker" formControlName="date" [min]="actualDate$ | async">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker ></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="form-time">
+      <mat-label>{{ 'Choose time' }}</mat-label>
+      <input
+        matInput
+        [format]="24"
+        formControlName="time"
+        [ngxMatTimepicker]="timePicker"
+        [min]="getMinDateTime((actualDate$ | async)!)"
+      />
+      <mat-hint>{{ 'Choose actual date' }}</mat-hint>
+      <ngx-mat-timepicker color="accent" #timePicker></ngx-mat-timepicker>
+    </mat-form-field>
+  </mat-dialog-content>
+</app-modal-layout>

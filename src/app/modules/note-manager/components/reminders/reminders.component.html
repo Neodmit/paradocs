@@ -1,0 +1,8 @@
+<app-table-with-creation
+  [tableFields]="remindersTableFields"
+  [dataSource]='dataSource$ | async'
+  [addButtonTitle]="'+ Добавить напоминание'"
+  (onDelete)="deleteReminder($event)"
+  (onEdit)="editReminder($event)"
+  (onAdd)="addReminder()"
+></app-table-with-creation>

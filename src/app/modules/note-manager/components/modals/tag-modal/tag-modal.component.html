@@ -1,0 +1,8 @@
+<app-modal-layout [modalTitle]="'Добавьте тэг'" (onSave)="save()">
+  <mat-dialog-content [formGroup]="tagGroupForm">
+    <mat-form-field>
+      <mat-label>{{ 'Заголовок' }}</mat-label>
+      <input formControlName="title" matInput>
+    </mat-form-field>
+  </mat-dialog-content>
+</app-modal-layout>
